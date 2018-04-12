@@ -23,12 +23,11 @@ fn main() {
      let address = matches.value_of("address").unwrap();
      let _format: Address = address.parse().unwrap();
 
-        // 1. Send a transaction
+
 
 
 
         //2. Balance Query
-
         if matches.value_of("INPUT").unwrap() == "balance"{
               let balance = web3.eth().balance(_format, None).wait().unwrap();
                     println!("Address balance is : {} ", balance);
@@ -37,18 +36,15 @@ fn main() {
 
 
         //3. Query Contract
-
         if matches.value_of("INPUT").unwrap() == "contract"{
                 println!("Address supplied is : {} ", _format);
-
                 let contract = Contract::from_json(web3.eth(), _format, include_bytes!("abi.json")).unwrap();
-                // let result = contract.query("name", (_format,), None, Options::default(), None);
-                // println!("Smart Contract Address Name: {} ", result);
-
-                let _balanceOf = contract.query("balanceOf", (my_account,), None, Options::default(), None);
-                let balance_of: U256 = _balanceOf.wait().unwrap();
+                let result = contract.query("name", (my_account,), None, Options::default(), None);
+                let result_of: String = result.wait().unwrap();
+                println!("Smart Contract Address Name: {} ", result_of);
+                let _balance_of = contract.query("balanceOf", (my_account,), None, Options::default(), None);
+                let balance_of: U256 = _balance_of.wait().unwrap();
                 println!("Smart Contract Balance : {} ", balance_of);
-
 
         }
        match matches.occurrences_of("v") {
