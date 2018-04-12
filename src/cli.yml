@@ -3,8 +3,14 @@ version: "1.0"
 author: Saransh Sharma <saranshisat@icloud.com>
 about: Does awesome things given by parity!
 args:
+    - address:
+        short: a
+        long: address
+        value_name: address
+        help: Sets an address to query balance and other operations
+        takes_value: true
     - INPUT:
-        help: Pass transactions , address and smart contract address 
+        help: Pass transactions , address and smart contract address
         required: true
         index: 1
     - verbose:
